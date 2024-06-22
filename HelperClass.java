@@ -1,3 +1,5 @@
+import java.util.Locale;
+
 public class HelperClass {
 
     public static boolean validateName(String username) {
@@ -12,7 +14,7 @@ public class HelperClass {
     }
 
     public static boolean validateRole(String role) {
-        if (role.equals(role.toLowerCase())){
+        if (role.toLowerCase().equals("owner")){
             return true;
         }
         return false;

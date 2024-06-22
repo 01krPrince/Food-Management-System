@@ -16,4 +16,8 @@ public class FoodItemService {
     public Map<String , String> getRestaurantMenuOf(String restaurantName) {
         return foodItemRepository.getRestaurantMenuOf(restaurantName);
     }
+
+    public void removeItem(int itemIDToRemove) {
+        foodItemRepository.removeItem(itemIDToRemove);
+    }
 }

@@ -65,6 +65,28 @@ public class RestaurantRepository {
         return "null";
     }
 
+    public int isRestaurantExist(String restaurantName, String email) {
+        for (Restaurant restaurant : restaurantList){
+            if (restaurant.getRestautantName().equals(restaurantName)){
+                if (restaurant.getEmail().equals(email)){
+                    return 2;
+                }
+                else {
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
+
+    public boolean isphoneExist(String phone) {
+        for (Restaurant restaurantOwner : restaurantList){
+            if (restaurantOwner.getPhone().equals(phone)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 

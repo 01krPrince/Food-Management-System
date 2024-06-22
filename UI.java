@@ -24,7 +24,14 @@ public class UI {
             System.out.println("1. Register");
             System.out.println("2. Login");
             System.out.println("3. Exit");
-            choice = sc.nextInt();
+            try {
+                choice = sc.nextInt();
+            } catch (Exception e) {
+                System.out.println(e + "👾");
+                System.out.println("Try again");
+                sc.nextLine(); // consume the leftover newline
+                continue;
+            }
             sc.nextLine(); // consume the leftover newline
 
             if (choice == 1) {
@@ -42,10 +49,35 @@ public class UI {
                 System.out.print("Enter your email: ");
                 while (true) {
                     email = sc.nextLine();
-                    if (HelperClass.validateEmail(email)) {
-                        break;
+                    if (helperClass.validateEmail(email)) {
+                        if (!userController.isEmailExist(email)) {
+                            break;
+                        }
+                        System.out.println("This email is registered already.");
+                        System.out.println("1. Enter a different email");
+                        System.out.println("2. Go back to the main menu");
+                        try {
+                            choice = sc.nextInt();
+                            sc.nextLine(); // consume the leftover newline
+                        } catch (Exception e) {
+                            System.out.println(e + "👾👾 Try again with a valid choice");
+                            sc.nextLine(); // consume the leftover newline
+                            continue;
+                        }
+                        if (choice == 1) {
+                            continue;
+                        } else if (choice == 2) {
+                            break;
+                        } else {
+                            System.out.println("Invalid option. Please select a valid option.");
+                        }
+                    } else {
+                        System.out.println("Invalid email address. Please enter a valid email address:");
                     }
-                    System.out.println("Invalid email address. Please enter a valid email address:");
+                }
+
+                if (choice == 2) {
+                    continue; // go back to the main menu
                 }
 
                 String role;
@@ -77,7 +109,25 @@ public class UI {
                 if (role.equals("owner")) {
                     System.out.println("Enter your restaurant details:");
                     System.out.print("Restaurant name: ");
-                    String restaurantName = sc.nextLine();
+                    String restaurantName;
+                    int isRestaurantExist;
+                    while (true) {
+                        restaurantName = sc.nextLine();
+                        isRestaurantExist = restaurantController.isRestaurantExist(restaurantName, email);
+                        if (isRestaurantExist == 0) {
+                            break;
+                        } else if (isRestaurantExist == 2) {
+                            System.out.println("you have already registered this restaurant , Thanks you😊");
+                            break;
+                        }
+                        else {
+                            System.out.println("Restaurant name is already registered by a different user");
+                            break;
+                        }
+                    }
+                    if (isRestaurantExist == 2 || isRestaurantExist == 1){
+                        continue;
+                    }
                     System.out.print("Location: ");
                     String location = sc.nextLine();
                     System.out.print("Phone number: ");
@@ -85,13 +135,17 @@ public class UI {
                     while (true) {
                         phone = sc.nextLine();
                         if (helperClass.validatePhone(phone)) {
-                            break;
+                            if (!restaurantController.isphoneExist(phone)){
+                                break;
+                            }
+                            System.out.println("Enter YOUR phone number please");
+                            continue;
                         }
                         System.out.println("Enter a valid phone number");
                     }
 
                     int id = restaurantController.registerRestaurant(email, restaurantName, location, phone);
-                    System.out.println("Id of your restaurant is : " + id);
+                    System.out.println("Id of your restaurant is: " + id);
                     System.out.println();
                 }
             } else if (choice == 2) {
@@ -121,13 +175,20 @@ public class UI {
                             System.out.println("4. Logout");
                             System.out.println("5. Exit");
                             System.out.println("6. Register restaurant");
-                            System.out.println("7. Remove restaurant from application");
+                            System.out.println("7. Remove restaurant");
                             System.out.println("8. Back to previous menu");
-                            choice = sc.nextInt();
-                            sc.nextLine(); // consume the leftover newline
+                            try {
+                                choice = sc.nextInt();
+                            }
+                            catch (Exception e){
+                                System.out.println(e + "👾👾Try again");
+                                System.out.println();
+                                System.out.println();
+                            }
+                            sc.nextLine();
 
                             switch (choice) {
-                                case 1:
+                                case 1: // Display your restaurant and its menu
                                     Map<String, String> restaurantList = restaurantController.getRestaurantListOf(email);
                                     if (restaurantList.size() == 0) {
                                         System.out.println("You have not registered your restaurant yet.");
@@ -136,7 +197,7 @@ public class UI {
                                         System.out.println("3. Exit");
                                         System.out.println("4. Back to previous menu");
                                         choice = sc.nextInt();
-                                        sc.nextLine(); // consume the leftover newline
+                                        sc.nextLine();
 
                                         switch (choice) {
                                             case 1:
@@ -203,44 +264,75 @@ public class UI {
                                         }
                                     }
                                     break;
-                                case 2:
-                                    Map<String, String> restaurantList2 = restaurantController.getRestaurantListOf(email);
+                                case 2: // Add item in menu
+                                    restaurantList = restaurantController.getRestaurantListOf(email);
                                     System.out.println("Your registered restaurants name & Id");
-                                    for (Map.Entry<String, String> entry : restaurantList2.entrySet()) {
+                                    for (Map.Entry<String, String> entry : restaurantList.entrySet()) {
                                         String restaurantName = entry.getKey();
                                         String restaurantId = entry.getValue();
                                         System.out.println("Restaurant name: " + restaurantName + "  Id: " + restaurantId);
                                     }
-                                    System.out.println("Enter restaurant Id to add more items in menu:");
+                                    System.out.println("Enter restaurant Id to add item in their menu:");
                                     String restaurantId = sc.nextLine();
                                     System.out.print("Enter item to add: ");
                                     String itemToAdd = sc.nextLine();
                                     foodItemController.addItem(itemToAdd, restaurantId);
                                     System.out.println("Item added successfully");
                                     break;
-                                case 3:
-                                    // Code to remove an item from the menu
+                                case 3:  // remove an item from the menu
+                                    restaurantList = restaurantController.getRestaurantListOf(email);
+                                    System.out.println("Your registered restaurants name & Id");
+                                    for (Map.Entry<String, String> entry : restaurantList.entrySet()) {
+                                        String restaurantName = entry.getKey();
+                                        restaurantId = entry.getValue();
+                                        System.out.println("Restaurant name: " + restaurantName + "  Id: " + restaurantId);
+                                    }
+                                    System.out.println("Enter restaurant Id to remove item from their menu:");
+                                    restaurantId = sc.nextLine();
+                                    System.out.print("Enter item Id to remove: ");
+                                    int itemIDToRemove = sc.nextInt();
+                                    foodItemController.removeItem(itemIDToRemove);
+                                    System.out.println("Item removed from menu");
+                                    System.out.println("Hope you will add this soon");
                                     break;
-                                case 4:
+                                case 4:  // Log out...
                                     System.out.println("Logging out...");
                                     break ownerMenu;
-                                case 5:
+                                case 5:  // Quit from application
                                     System.out.println("Exiting application...");
                                     return;
                                 case 6:
-                                    System.out.println("Enter restaurant details:");
+                                    System.out.println("Enter restaurant details");
                                     System.out.print("Restaurant name: ");
-                                    String restaurantName = sc.nextLine();
+                                    String restaurantName;
+                                    int isRestaurantExist;
+                                    while (true) {
+                                        restaurantName = sc.nextLine();
+                                        isRestaurantExist = restaurantController.isRestaurantExist(restaurantName, email);
+                                        if (isRestaurantExist == 0) {
+                                            break;
+                                        } else if (isRestaurantExist == 2) {
+                                            System.out.println("you have already registered this restaurant , Thanks you😊");
+                                            break;
+                                        }
+                                        else {
+                                            System.out.println("Restaurant name is already registered by a different user");
+                                            break;
+                                        }
+                                    }
+                                    if (isRestaurantExist == 2 || isRestaurantExist == 1){
+                                        break;
+                                    }
                                     System.out.print("Location: ");
                                     String location = sc.nextLine();
                                     System.out.print("Phone number: ");
                                     String phone = sc.nextLine();
-                                    // String registrationStatus = restaurantController.registerRestaurant(email, restaurantName, location, phone);
-                                    // System.out.println(registrationStatus);
+                                    int registrationStatus = restaurantController.registerRestaurant(email, restaurantName, location, phone);
+                                    System.out.println(registrationStatus);
                                     System.out.println();
                                     break;
                                 case 7:
-                                    System.out.println("Are you sure you want to discontinue your services?");
+                                    System.out.println("Are you sure you want to discontinue a restaurant?");
                                     System.out.println("true or false");
                                     if (sc.nextLine().equals("true")) {
                                         System.out.println("Select restaurant to discontinue");
@@ -281,8 +373,15 @@ public class UI {
                             System.out.println("3. Logout");
                             System.out.println("4. Exit");
                             System.out.println("5. Back to previous menu");
-                            choice = sc.nextInt();
-                            sc.nextLine(); // consume the leftover newline
+                            try {
+                                choice = sc.nextInt();
+                            }
+                            catch (Exception e){
+                                System.out.println(e + "👾👾Try again");
+                                System.out.println();
+                                System.out.println();
+                            }
+                            sc.nextLine();
 
                             switch (choice) {
                                 case 1:
@@ -306,12 +405,10 @@ public class UI {
                     } else {
                         System.out.println("Invalid role detected.");
                     }
-                } else {
-                    System.out.println("Login failed. Please try again.");
                 }
             } else if (choice == 3) {
-                System.out.println("Thank you for using the Food Ordering System Application. Goodbye!");
-                break;
+                System.out.println("Exiting application...");
+                return;
             } else {
                 System.out.println("Invalid option. Please select a valid option.");
             }

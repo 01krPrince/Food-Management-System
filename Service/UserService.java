@@ -3,6 +3,7 @@ package Service;
 import Repositories.UserRepository;
 
 public class UserService {
+
     UserRepository userRepository = new UserRepository();
 
     public String registerUser(String username, String email, String role, String password) {
@@ -24,4 +25,9 @@ public class UserService {
     public String getRole(String email, String password) {
         return UserRepository.getRole(email , password);
     }
+
+    public boolean isEmailExist(String email) {
+        return userRepository.isEmailExist(email);
+    }
+
 }

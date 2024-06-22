@@ -21,7 +21,7 @@ public class FoodItemRepository {
     public Map<String, String> getRestaurantMenuOf(String restaurantName) {
         Map<String, String> menuOf = new HashMap<>();
         for (FoodItem item : foodItemsList) {
-            if (item.getRestaurantname().equals(restaurantName)) {
+            if (item.getStatus().equals("available")  &&  item.getRestaurantname().equals(restaurantName)) {
                 menuOf.put(item.getItem(), String.valueOf(item.getFoodItemsId()));
             }
         }
@@ -29,5 +29,11 @@ public class FoodItemRepository {
     }
 
 
-
+    public void removeItem(int itemIDToRemove) {
+        for (FoodItem foodItem : foodItemsList){
+            if (foodItem.getFoodItemsId() == itemIDToRemove){
+                foodItem.setStatus();
+            }
+        }
+    }
 }

@@ -28,4 +28,11 @@ public class RestaurantController {
         return restaurantService.discontinue(restaurantChoice);
     }
 
+    public int isRestaurantExist(String restaurantName, String email) {
+        return restaurantService.isRestaurantExist(restaurantName , email);
+    }
+
+    public boolean isphoneExist(String phone) {
+        return restaurantService.isphoneExist(phone);
+    }
 }

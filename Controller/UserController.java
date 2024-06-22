@@ -16,4 +16,9 @@ public class UserController {
     public String getRole(String email, String password) {
         return userService.getRole(email , password);
     }
+
+    public boolean isEmailExist(String email) {
+        return userService.isEmailExist(email);
+    }
+
 }

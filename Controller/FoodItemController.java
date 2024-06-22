@@ -16,4 +16,8 @@ public class FoodItemController {
     public Map<String , String> getRestaurantMenuOf(String restaurantName) {
         return foodItemService.getRestaurantMenuOf(restaurantName);
     }
+
+    public void removeItem(int itemIDToRemove) {
+        foodItemService.removeItem(itemIDToRemove);
+    }
 }

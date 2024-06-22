@@ -43,4 +43,13 @@ public class UserRepository {
         return false;
     }
 
+    public boolean isEmailExist(String email) {
+        for (User user : userList){
+            if (user.getEmail().equals(email)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
