@@ -30,4 +30,7 @@ public class UserService {
         return userRepository.isEmailExist(email);
     }
 
+    public void saveAddressandPhoneOfCustomer(String username, String email, String phoneNo , String address) {
+        userRepository.saveAddressandPhoneOfCustomer(username , email , phoneNo , address);
+    }
 }

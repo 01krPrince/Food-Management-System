@@ -21,4 +21,7 @@ public class UserController {
         return userService.isEmailExist(email);
     }
 
+    public void saveAddressandPhoneOfCustomer(String username, String email, String phoneNo , String address) {
+        userService.saveAddressandPhoneOfCustomer(username , email , phoneNo , address);
+    }
 }

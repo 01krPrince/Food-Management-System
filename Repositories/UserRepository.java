@@ -52,4 +52,12 @@ public class UserRepository {
         return false;
     }
 
+    public void saveAddressandPhoneOfCustomer(String username, String email, String phoneNo , String address) {
+        for (User user : userList){
+            if (user.getUsername().equals(username)  &&  user.getEmail().equals(email)){
+                user.setPhone(phoneNo);
+                user.setAddress(address);
+            }
+        }
+    }
 }

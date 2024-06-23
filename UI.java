@@ -461,6 +461,12 @@ public class UI {
 
 
                     else if (role.equals("customer")) {
+
+                        sc.nextLine();
+                        String address = sc.nextLine();
+                        String phoneNo = sc.nextLine();
+                        userController.saveAddressandPhoneOfCustomer(username , email , phoneNo , address);
+
                         customerMenu:
                         while (true) {
                             System.out.println("Customer Menu:");
@@ -498,13 +504,11 @@ public class UI {
                                                 System.out.println("Menu Item : " +  menuItem + "    ID : " + menuId);
                                             }
                                         }
-                                        while (true){
-                                            System.out.println("Enter restaurant id and item id to place your order");
-                                            String restaurantId = sc.nextLine();
-                                            String itemId = sc.nextLine();
-//                                            orderController.placeOrder(restaurantId , itemId , name , address);
-                                        }
-
+                                        System.out.println("Enter restaurant id and item id to place your order");
+                                        String restaurantId = sc.nextLine();
+                                        String itemId = sc.nextLine();
+                                        orderController.placeOrder(restaurantId , itemId , username , address);
+                                        System.out.println("Order Placed🎉🎉🎉");
                                     }
                                     break;
                                 case 2:
