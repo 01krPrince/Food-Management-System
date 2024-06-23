@@ -1,19 +1,28 @@
 package model;
 
 public class Order {
-    public String username;
-    public String address;
-    public String itemID;
-    public String restaurantID;
-    public int orderID;
+    private String username;
+    private String address;
+    private String itemID;
+    private String itemName;
+    private String restaurantID;
+    private int orderID;
+    private String email;
+    private int price;
+    private String orderStatus = "Order Placed, Waiting for confirmation by restaurant...";
 
-    public Order(String username, String address, String restaurantID, String itemID , int orderID) {
+    public Order(String username, String address, String restaurantID, String itemID , String itemName , String email , int orderID , int price) {
         this.username = username;
         this.restaurantID = restaurantID;
         this.orderID = orderID;
+        this.itemName = itemName;
         this.address = address;
         this.itemID = itemID;
+        this.email = email;
+        this.price = price;
     }
+
+
 
     public String getUsername() {
         return username;
@@ -45,5 +54,45 @@ public class Order {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(String itemID) {
+        this.itemID = itemID;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

@@ -2,10 +2,9 @@ import Controller.FoodItemController;
 import Controller.OrderController;
 import Controller.RestaurantController;
 import Controller.UserController;
+import model.Order;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class UI {
 
@@ -179,6 +178,7 @@ public class UI {
                             System.out.println("1. Display your restaurant and its menu");
                             System.out.println("2. Add item to menu");
                             System.out.println("3. Remove item from menu");
+                            System.out.println("9. Update Order Status");
                             System.out.println("4. Logout");
                             System.out.println("5. Exit");
                             System.out.println("6. Register restaurant");
@@ -258,7 +258,9 @@ public class UI {
                                             if (choice == 1) {
                                                 System.out.print("Enter item to add: ");
                                                 String itemToAdd = sc.nextLine();
-                                                foodItemController.addItem(itemToAdd, restaurantId);
+                                                System.out.print("Enter price for " + itemToAdd + " : ");
+                                                int price = sc.nextInt();
+                                                foodItemController.addItem(itemToAdd, restaurantId , price);
                                                 System.out.println("Item added successfully");
                                             } else if (choice == 2) {
                                                 break ownerMenu;
@@ -289,7 +291,9 @@ public class UI {
                                     String restaurantId = sc.nextLine();
                                     System.out.print("Enter item to add: ");
                                     String itemToAdd = sc.nextLine();
-                                    foodItemController.addItem(itemToAdd, restaurantId);
+                                    System.out.print("Enter price for " + itemToAdd + " : ");
+                                    int price = sc.nextInt();
+                                    foodItemController.addItem(itemToAdd, restaurantId , price);
                                     System.out.println("Item added successfully");
                                     break;
                                 case 3:  // Remove an item from the menu
@@ -423,6 +427,19 @@ public class UI {
                                     break;
                                 case 8:
                                     break ownerMenu;
+
+                                case 9 :  //  Checking Order Request   &    Updating Order Status
+                                    List<String> checkingOrderRequest = new ArrayList<>();
+                                    Map<String, String> restaurantList3 = restaurantController.getRestaurantListOf(email);
+                                    for (Map.Entry<String, String> entry : restaurantList3.entrySet()) {
+                                        restaurantId = entry.getValue();
+                                        checkingOrderRequest = orderController.checkingOrderRequest(restaurantId);
+                                        for (String orderId : checkingOrderRequest){
+                                            System.out.print("Order id "+orderId);
+                                            System.out.println(" is "+orderController.deleverOrder(orderId));
+                                        }
+                                    }
+
                                 default:
                                     System.out.println("Invalid option. Please select a valid option.");
                             }
@@ -472,6 +489,7 @@ public class UI {
                             System.out.println("Customer Menu:");
                             System.out.println("1. Place an order");
                             System.out.println("2. View order history");
+                            System.out.println("6. View order status");
                             System.out.println("3. Logout");
                             System.out.println("4. Exit");
                             System.out.println("5. Back to previous menu");
@@ -502,17 +520,25 @@ public class UI {
                                                 String menuId = entry1.getValue();
                                                 String menuItem = entry1.getKey();
                                                 System.out.println("Menu Item : " +  menuItem + "    ID : " + menuId);
+                                                int priceOfItem = foodItemController.getPrice(menuItem , menuId);
                                             }
                                         }
                                         System.out.println("Enter restaurant id and item id to place your order");
                                         String restaurantId = sc.nextLine();
                                         String itemId = sc.nextLine();
-                                        orderController.placeOrder(restaurantId , itemId , username , address);
+                                        String itemName = foodItemController.getItemNameById(itemId);
+                                        orderController.placeOrder(restaurantId , itemId , itemName , username , address , email);
                                         System.out.println("Order Placed🎉🎉🎉");
                                     }
                                     break;
-                                case 2:
-                                    // Code to view order history
+                                case 2:  // Code to view order history
+                                    Map<String , String> orderHistory =  orderController.getOrderHistory(username , email);
+                                    for (Map.Entry<String,String> entity : orderHistory.entrySet()){
+                                        String orderId = entity.getValue();
+                                        String orderItem = entity.getKey();
+                                        System.out.println("Order Item : " +  orderItem + "   Order ID : " + orderId);
+                                        List<String> orderHistoryDetailsList = orderController.orderHistoryDetails(orderItem , orderId);
+                                    }
                                     break;
                                 case 3:
                                     System.out.println("Logging out...");

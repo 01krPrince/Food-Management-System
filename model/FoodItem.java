@@ -6,13 +6,15 @@ public class FoodItem {
     private int FoodItemsId;
     private String status;
     private String restaurantId;
+    private int price;
 
-    public FoodItem(String item, int foodItemId , String restaurantname , String restaurantId) {
+    public FoodItem(String item, int foodItemId , String restaurantname , String restaurantId , int price) {
         this.restaurantname = restaurantname;
         this.item = item;
         this.FoodItemsId = foodItemId;
         this.status = "available";
         this.restaurantId = restaurantId;
+        this.price = price;
     }
 
     public String getRestaurantname() {
@@ -53,5 +55,13 @@ public class FoodItem {
 
     public void setRestaurantId(String restaurantId) {
         this.restaurantId = restaurantId;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

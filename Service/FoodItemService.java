@@ -9,8 +9,8 @@ import java.util.Map;
 public class FoodItemService {
     FoodItemRepository foodItemRepository = new FoodItemRepository();
 
-    public void addItem(String item,String restorentName, String restaurantId) {
-        foodItemRepository.addItem( item,restorentName,  restaurantId);
+    public void addItem(String item,String restorentName, String restaurantId , int price) {
+        foodItemRepository.addItem( item,restorentName,  restaurantId , price);
     }
 
     public Map<String , String> getRestaurantMenuOf(String restaurantName) {
@@ -23,5 +23,13 @@ public class FoodItemService {
 
     public Map<String, String> getRestaurantMenuByRestaurantId(String restaurantId) {
         return foodItemRepository.getRestaurantMenuByRestaurantId(restaurantId);
+    }
+
+    public String getItemNameById(String itemId) {
+        return foodItemRepository.getItemNameById(itemId);
+    }
+
+    public int getPrice(String menuItem, String menuId) {
+        return foodItemRepository.getPrice(menuItem , menuId);
     }
 }

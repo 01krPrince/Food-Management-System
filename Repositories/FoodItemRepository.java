@@ -11,9 +11,9 @@ public class FoodItemRepository {
     List<FoodItem> foodItemsList = new ArrayList<>();
     static int foodItemId = 1;
 
-    public void addItem(String item , String restorentName , String restaurantId ) {
+    public void addItem(String item , String restorentName , String restaurantId , int price) {
         foodItemId = foodItemsList.size() + 1;
-        FoodItem foodItem = new FoodItem(item , foodItemId , restorentName , restaurantId);
+        FoodItem foodItem = new FoodItem(item , foodItemId , restorentName , restaurantId , price);
         foodItemsList.add(foodItem);
     }
 
@@ -44,5 +44,23 @@ public class FoodItemRepository {
             }
         }
         return menuOf;
+    }
+
+    public String getItemNameById(String itemId) {
+        for (FoodItem foodItem : foodItemsList){
+            if (String.valueOf(foodItem.getFoodItemsId()).equals(itemId)){
+                return foodItem.getItem();
+            }
+        }
+        return null;
+    }
+
+    public int getPrice(String menuItem, String menuId) {
+        for (FoodItem foodItem : foodItemsList){
+            if (foodItem.getItem().equals(menuItem)  &&  String.valueOf(foodItem.getFoodItemsId()).equals(menuId)  &&  foodItem.getStatus().equals("available")){
+                return foodItem.getPrice();
+            }
+        }
+        return 0;
     }
 }
