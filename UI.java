@@ -2,7 +2,7 @@ import Controller.FoodItemController;
 import Controller.OrderController;
 import Controller.RestaurantController;
 import Controller.UserController;
-import model.Order;
+
 
 import java.util.*;
 
@@ -168,7 +168,6 @@ public class UI {
                     System.out.println("Credentials not match in our entire repository, please register first!");
                 }
                 System.out.println();
-
                 if (loginStatus) {
                     String role = userController.getRole(email, password);
                     if (role.equals("owner")) {
@@ -197,7 +196,7 @@ public class UI {
                             switch (choice) {
                                 case 1: // Display your restaurant and its menu
                                     Map<String, String> restaurantList = restaurantController.getRestaurantListOf(email);
-                                    if (restaurantList.size() == 0) {
+                                    if (restaurantList.isEmpty()) {
                                         System.out.println("You have not registered your restaurant yet.");
                                         System.out.println("1. Register restaurant");
                                         System.out.println("2. Logout");
@@ -348,7 +347,7 @@ public class UI {
                                                 break;
                                             }
                                             else {
-                                                System.out.println("Invalid item id.");
+                                                System.out.println("item removed.");
                                                 break;
                                             }
                                         }
@@ -479,8 +478,9 @@ public class UI {
 
                     else if (role.equals("customer")) {
 
-                        sc.nextLine();
+                        System.out.print("Enter your Address : ");
                         String address = sc.nextLine();
+                        System.out.print("Enter phone number : ");
                         String phoneNo = sc.nextLine();
                         userController.saveAddressandPhoneOfCustomer(username , email , phoneNo , address);
 
@@ -507,10 +507,10 @@ public class UI {
                                 case 1:  //  Place an order
                                     Map<String, String> restaurantList = restaurantController.getAllAvailableRestaurantList();
                                     if (restaurantList.size() == 0){
-                                        System.out.println("There is no restaurant found");
+                                        System.out.println("Now, There is no restaurant available");
                                     }
                                     else {
-                                        System.out.println("Available Restaurants List");
+                                        System.out.println("Available Restaurants List and their menu");
                                         for (Map.Entry<String, String> entry : restaurantList.entrySet()) {
                                             String restaurantId = entry.getValue();
                                             String restaurantName = entry.getKey();

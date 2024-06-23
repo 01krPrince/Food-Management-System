@@ -4,7 +4,6 @@ public class HelperClass {
 
     public static boolean validateName(String username) {
         return username.matches("[a-zA-Z]+(\\s[a-zA-Z]+)?");
-
     }
 
     public static boolean validateEmail(String email) {
