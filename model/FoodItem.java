@@ -5,14 +5,15 @@ public class FoodItem {
     private String item;
     private int FoodItemsId;
     private String status;
+    private String restaurantId;
 
-    public FoodItem(String restaurantname, String item , int foodItemId) {
+    public FoodItem(String item, int foodItemId , String restaurantname , String restaurantId) {
         this.restaurantname = restaurantname;
         this.item = item;
         this.FoodItemsId = foodItemId;
         this.status = "available";
+        this.restaurantId = restaurantId;
     }
-
 
     public String getRestaurantname() {
         return restaurantname;
@@ -42,7 +43,15 @@ public class FoodItem {
         return status;
     }
 
-    public void setStatus() {
-        this.status = "unavailable";
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
     }
 }

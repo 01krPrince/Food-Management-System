@@ -9,15 +9,19 @@ import java.util.Map;
 public class FoodItemService {
     FoodItemRepository foodItemRepository = new FoodItemRepository();
 
-    public void addItem(String item, String restaurantName) {
-        foodItemRepository.addItem( item,  restaurantName);
+    public void addItem(String item,String restorentName, String restaurantId) {
+        foodItemRepository.addItem( item,restorentName,  restaurantId);
     }
 
     public Map<String , String> getRestaurantMenuOf(String restaurantName) {
         return foodItemRepository.getRestaurantMenuOf(restaurantName);
     }
 
-    public void removeItem(int itemIDToRemove) {
-        foodItemRepository.removeItem(itemIDToRemove);
+    public void removeItem(String restaurantId, String foodItemId) {
+        foodItemRepository.removeItem(restaurantId , foodItemId);
+    }
+
+    public Map<String, String> getRestaurantMenuByRestaurantId(String restaurantId) {
+        return foodItemRepository.getRestaurantMenuByRestaurantId(restaurantId);
     }
 }

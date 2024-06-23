@@ -35,4 +35,12 @@ public class RestaurantService {
     public boolean isphoneExist(String phone) {
         return restaurantRepository.isphoneExist(phone);
     }
+
+    public Map<String, String> getAllAvailableRestaurantList() {
+        return restaurantRepository.getAllAvailableRestaurantList();
+    }
+
+    public String getRestaurantNameById(String restaurantId) {
+        return restaurantRepository.getRestaurantNameById(restaurantId);
+    }
 }

@@ -38,7 +38,7 @@ public class RestaurantRepository {
         return null;
     }
 
-    public Map<String, String> getRestaurantListOf(String email) {
+    public  Map<String, String> getRestaurantListOf(String email) {
         Map<String, String> restaurantMap = new HashMap<>();
         for (Restaurant restaurant : restaurantList) {
             if (restaurant.getEmail().equals(email)) {
@@ -48,13 +48,14 @@ public class RestaurantRepository {
         return restaurantMap;
     }
 
+
     public String discontinueRestaurant(int restaurantChoice) {
         int i = 0;
         for (Restaurant restaurant : restaurantList){
             ++i;
             if(i == restaurantChoice){
-                if (restaurant.setStatus().equals("open")){
-                    restaurant.setStatus("close");
+                if (restaurant.getStatus().equals("open")){
+                    restaurant.getStatus("close");
                     return "discontinued";
                 }
                 else {
@@ -86,6 +87,26 @@ public class RestaurantRepository {
             }
         }
         return false;
+    }
+
+
+    public Map<String, String> getAllAvailableRestaurantList() {
+        Map<String, String> restaurantMap = new HashMap<>();
+        for (Restaurant restaurant : restaurantList) {
+            if (restaurant.getStatus().equals("open")) {
+                restaurantMap.put(restaurant.getRestautantName(), String.valueOf(restaurant.getRestaurantsId()));
+            }
+        }
+        return restaurantMap;
+    }
+
+    public String getRestaurantNameById(String restaurantId) {
+        for (Restaurant restaurant : restaurantList){
+            if (String.valueOf(restaurant.getRestaurantsId()).equals(restaurantId)){
+                return restaurant.getRestautantName();
+            }
+        }
+        return null;
     }
 }
 

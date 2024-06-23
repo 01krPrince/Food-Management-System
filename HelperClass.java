@@ -3,7 +3,8 @@ import java.util.Locale;
 public class HelperClass {
 
     public static boolean validateName(String username) {
-        return username.matches("[a-zA-Z]+");
+        return username.matches("[a-zA-Z]+(\\s[a-zA-Z]+)?");
+
     }
 
     public static boolean validateEmail(String email) {
@@ -14,7 +15,7 @@ public class HelperClass {
     }
 
     public static boolean validateRole(String role) {
-        if (role.toLowerCase().equals("owner")){
+        if (role.toLowerCase().equals("owner")  ||  role.toLowerCase().equals("customer")){
             return true;
         }
         return false;

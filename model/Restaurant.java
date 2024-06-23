@@ -49,11 +49,11 @@ public class Restaurant {
         this.phone = phone;
     }
 
-    public String setStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void getStatus(String status) {
         this.status = status;
     }
 
