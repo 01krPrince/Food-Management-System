@@ -1,27 +1,31 @@
 package Controller;
 
-import Service.UserService;
+import Service.UserServiceImpl;
 
 public class UserController {
-    UserService userService = new UserService();
+    UserServiceImpl userServiceImpl = new UserServiceImpl();
 
     public String registerUser(String username, String email, String role, String password) {
-        return userService.registerUser(username , email , role , password);
+        return userServiceImpl.registerUser(username , email , role , password);
     }
 
     public boolean loginUser(String email, String password) {
-        return userService.loginUser( email,  password);
+        return userServiceImpl.loginUser( email,  password);
     }
 
     public String getRole(String email, String password) {
-        return userService.getRole(email , password);
+        return userServiceImpl.getRole(email , password);
     }
 
     public boolean isEmailExist(String email) {
-        return userService.isEmailExist(email);
+        return userServiceImpl.isEmailExist(email);
     }
 
     public void saveAddressandPhoneOfCustomer(String username, String email, String phoneNo , String address) {
-        userService.saveAddressandPhoneOfCustomer(username , email , phoneNo , address);
+        userServiceImpl.saveAddressandPhoneOfCustomer(username , email , phoneNo , address);
+    }
+
+    public String getAddress(String username, String email) {
+        return userServiceImpl.getAddress(username , email);
     }
 }

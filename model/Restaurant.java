@@ -1,7 +1,7 @@
 package model;
 
 public class Restaurant {
-    private String restautantName;
+    private String restaurantName;
     private String location;
     private String phone;
     private String email;
@@ -9,7 +9,7 @@ public class Restaurant {
     private int restaurantsId;
 
     public Restaurant(String restautantName, String location, String phone, String email , int restaurantsId) {
-        this.restautantName = restautantName;
+        this.restaurantName = restautantName;
         this.location = location;
         this.phone = phone;
         this.email = email;
@@ -18,11 +18,11 @@ public class Restaurant {
     }
 
     public String getRestautantName() {
-        return restautantName;
+        return restaurantName;
     }
 
     public void setRestautantName(String restautantName) {
-        this.restautantName = restautantName;
+        this.restaurantName = restautantName;
     }
 
     public String getEmail() {

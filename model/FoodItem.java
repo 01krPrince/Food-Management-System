@@ -1,16 +1,16 @@
 package model;
 
 public class FoodItem {
-    private String restaurantname;
-    private String item;
+    private String restaurantName;
+    private String foodItemName;
     private int FoodItemsId;
     private String status;
     private String restaurantId;
     private int price;
 
-    public FoodItem(String item, int foodItemId , String restaurantname , String restaurantId , int price) {
-        this.restaurantname = restaurantname;
-        this.item = item;
+    public FoodItem(String foodItemName, int foodItemId , String restaurantName , String restaurantId , int price) {
+        this.restaurantName = restaurantName;
+        this.foodItemName = foodItemName;
         this.FoodItemsId = foodItemId;
         this.status = "available";
         this.restaurantId = restaurantId;
@@ -18,19 +18,19 @@ public class FoodItem {
     }
 
     public String getRestaurantname() {
-        return restaurantname;
+        return restaurantName;
     }
 
-    public void setRestaurantname(String restaurantname) {
-        this.restaurantname = restaurantname;
+    public void setRestaurantname(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 
-    public String getItem() {
-        return item;
+    public String getfoodItemName() {
+        return foodItemName;
     }
 
-    public void setItem(String item) {
-        this.item = item;
+    public void setfoodItemName(String item) {
+        this.foodItemName = item;
     }
 
     public int getFoodItemsId() {

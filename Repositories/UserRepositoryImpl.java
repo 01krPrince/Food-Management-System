@@ -5,7 +5,7 @@ import model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepository {
+public class UserRepositoryImpl {
 
     private static List<User> userList = new ArrayList<>();
 
@@ -59,5 +59,15 @@ public class UserRepository {
                 user.setAddress(address);
             }
         }
+    }
+
+
+    public String getAddress(String username, String email) {
+        for (User user : userList){
+            if (user.getUsername().equals(username)  &&  user.getEmail().equals(email)){
+                return user.getAddress();
+            }
+        }
+        return null;
     }
 }

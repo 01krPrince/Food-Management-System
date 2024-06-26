@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RestaurantRepository {
+public class RestaurantRepositoryImpl {
     List<Restaurant> restaurantList = new ArrayList<>();
     static int restaurantsId = 100;
 
@@ -80,7 +80,7 @@ public class RestaurantRepository {
         return 0;
     }
 
-    public boolean isphoneExist(String phone) {
+    public boolean isPhoneExist(String phone) {
         for (Restaurant restaurantOwner : restaurantList){
             if (restaurantOwner.getPhone().equals(phone)){
                 return true;
@@ -107,6 +107,20 @@ public class RestaurantRepository {
             }
         }
         return null;
+    }
+
+    public int isValidRestaurantId(String username, String email, String restaurantId) {
+        for (Restaurant restaurant : restaurantList){
+            if (String.valueOf(restaurant.getRestaurantsId()).equals(restaurantId)){
+                if (restaurant.getEmail().equals(email)){
+                    return 2;
+                }
+                else {
+                    return 1;
+                }
+            }
+        }
+        return 0;
     }
 }
 

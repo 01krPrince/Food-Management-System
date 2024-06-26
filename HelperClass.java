@@ -1,5 +1,3 @@
-import java.util.Locale;
-
 public class HelperClass {
 
     public static boolean validateName(String username) {
@@ -70,4 +68,10 @@ public class HelperClass {
         return false;
     }
 
+    public boolean restaurantNameValidate(String restaurantName) {
+        if (!restaurantName.isEmpty()){
+            return true;
+        }
+        return false;
+    }
 }
