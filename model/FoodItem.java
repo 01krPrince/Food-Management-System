@@ -17,11 +17,11 @@ public class FoodItem {
         this.price = price;
     }
 
-    public String getRestaurantname() {
+    public String getRestaurantName() {
         return restaurantName;
     }
 
-    public void setRestaurantname(String restaurantName) {
+    public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
     }
 

@@ -1,13 +1,12 @@
 package Controller;
 
-import Service.OrderServiceImpl;
+import Service.Impl.OrderServiceImpl;
 
 import java.util.List;
 import java.util.Map;
 
 public class OrderController {
     OrderServiceImpl orderServiceImpl = new OrderServiceImpl();
-    FoodItemController foodItemController = new FoodItemController();
 
     public void placeOrder(String restaurantId, String restaurantName, String foodId, String foodItemName , String username , String email , int price) {
         orderServiceImpl.placeOrder(restaurantId , restaurantName , foodId , foodItemName , username  , email , price);
@@ -33,5 +32,9 @@ public class OrderController {
 
     public String getFoodIdBy(String orderId) {
         return orderServiceImpl.getFoodIdBy(orderId);
+    }
+
+    public Map<String, String> getPendingOrderList() {
+        return orderServiceImpl.getPendingOrderList();
     }
 }

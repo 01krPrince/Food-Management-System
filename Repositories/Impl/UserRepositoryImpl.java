@@ -1,15 +1,16 @@
-package Repositories;
+package Repositories.Impl;
 
+import Repositories.UserRepository;
 import model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserRepositoryImpl {
+public class UserRepositoryImpl implements UserRepository {
 
-    private static List<User> userList = new ArrayList<>();
+    private static final List<User> userList = new ArrayList<>();
 
-    public static String getRole(String email, String password) {
+    public String getRole(String email, String password) {
         for (User user : userList){
             if(user.getEmail().equals(email)  &&  user.getPassword().equals(password)){
                 return user.getRole();
@@ -29,12 +30,12 @@ public class UserRepositoryImpl {
     }
 
 
-    public static void registerUser(String username, String email, String role, String password) {
+    public void registerUser(String username, String email, String role, String password) {
         User user = new User(username , email , role , password);
         userList.add(user);
     }
 
-    public static boolean loginUser(String email, String password) {
+    public boolean loginUser(String email, String password) {
         for(User user : userList){
             if (user.getEmail().equals(email)  &&  user.getPassword().equals(password)){
                 return true;
@@ -52,7 +53,7 @@ public class UserRepositoryImpl {
         return false;
     }
 
-    public void saveAddressandPhoneOfCustomer(String username, String email, String phoneNo , String address) {
+    public void saveAddressAndPhoneOfCustomer(String username, String email, String phoneNo , String address) {
         for (User user : userList){
             if (user.getUsername().equals(username)  &&  user.getEmail().equals(email)){
                 user.setPhone(phoneNo);

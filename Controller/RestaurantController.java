@@ -1,8 +1,7 @@
 package Controller;
 
-import Service.RestaurantServiceImpl;
+import Service.Impl.RestaurantServiceImpl;
 
-import java.util.List;
 import java.util.Map;
 
 public class RestaurantController {
@@ -10,14 +9,6 @@ public class RestaurantController {
 
     public int registerRestaurant(String email, String restaurantName, String location , String phone) {
         return restaurantServiceImpl.registerRestaurant(email , restaurantName , location , phone);
-    }
-
-    public List getRestaurantNameList(String email, String password) {
-        return restaurantServiceImpl.getRestaurantNameList(email , password);
-    }
-
-    public String getrestaurantNameByEamil(String email) {
-        return restaurantServiceImpl.getrestaurantNameByEamil(email);
     }
 
     public Map<String, String> getRestaurantListOf(String email) {
@@ -33,7 +24,7 @@ public class RestaurantController {
     }
 
     public boolean isphoneExist(String phone) {
-        return restaurantServiceImpl.isphoneExist(phone);
+        return restaurantServiceImpl.isPhoneExist(phone);
     }
 
     public Map<String, String> getAllAvailableRestaurantList() {

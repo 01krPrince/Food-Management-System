@@ -1,5 +1,6 @@
-package Repositories;
+package Repositories.Impl;
 
+import Repositories.RestaurantRepository;
 import model.Restaurant;
 
 import java.util.ArrayList;
@@ -7,58 +8,61 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RestaurantRepositoryImpl {
+public class RestaurantRepositoryImpl implements RestaurantRepository {
     List<Restaurant> restaurantList = new ArrayList<>();
     static int restaurantsId = 100;
 
-    public int registerRestaurant(String email, String restaurantName, String location , String phone) {
+    @Override
+    public int registerRestaurant(String email, String restaurantName, String location, String phone) {
         restaurantsId = restaurantsId + ((restaurantList.size()) * 5);
-        Restaurant restaurant = new Restaurant(restaurantName , location , phone , email , restaurantsId);
+        Restaurant restaurant = new Restaurant(restaurantName, location, phone, email, restaurantsId);
         restaurantList.add(restaurant);
         return restaurantsId;
     }
 
-    public List getRestaurantNameList(String email, String password) {
+    @Override
+    public List<String> getRestaurantNameList(String email, String password) {
         List<String> restaurants = new ArrayList<>();
-        for (Restaurant i : restaurantList){
-            if (i.getEmail().equals(email)){
+        for (Restaurant i : restaurantList) {
+            if (i.getEmail().equals(email)) {
                 restaurants.add(i.getRestautantName());
                 restaurants.add(String.valueOf(restaurantsId));
             }
         }
-        return restaurantList;
+        return restaurants;
     }
 
-    public String getRestaurantNameByEamil(String email) {
-        for (Restaurant restaurant : restaurantList){
-            if (restaurant.getEmail().equals(email)){
-                return restaurant.getEmail();
-            }
-        }
-        return null;
-    }
+//    @Override
+//    public String getRestaurantNameByEmail(String email) {
+//        for (Restaurant restaurant : restaurantList) {
+//            if (restaurant.getEmail().equals(email)) {
+//                return restaurant.getEmail();
+//            }
+//        }
+//        return null;
+//    }
 
-    public  Map<String, String> getRestaurantListOf(String email) {
+    @Override
+    public Map<String, String> getRestaurantListOf(String email) {
         Map<String, String> restaurantMap = new HashMap<>();
         for (Restaurant restaurant : restaurantList) {
             if (restaurant.getEmail().equals(email)) {
-                restaurantMap.put(restaurant.getRestautantName(), String.valueOf(restaurant.getRestaurantsId()));
+                restaurantMap.put(String.valueOf(restaurant.getRestaurantsId()), restaurant.getRestautantName());
             }
         }
         return restaurantMap;
     }
 
-
+    @Override
     public String discontinueRestaurant(int restaurantChoice) {
         int i = 0;
-        for (Restaurant restaurant : restaurantList){
+        for (Restaurant restaurant : restaurantList) {
             ++i;
-            if(i == restaurantChoice){
-                if (restaurant.getStatus().equals("open")){
-                    restaurant.getStatus("close");
+            if (i == restaurantChoice) {
+                if (restaurant.getStatus().equals("open")) {
+                    restaurant.setStatus("close");
                     return "discontinued";
-                }
-                else {
+                } else {
                     return "already discontinued";
                 }
             }
@@ -66,13 +70,13 @@ public class RestaurantRepositoryImpl {
         return "null";
     }
 
+    @Override
     public int isRestaurantExist(String restaurantName, String email) {
-        for (Restaurant restaurant : restaurantList){
-            if (restaurant.getRestautantName().equals(restaurantName)){
-                if (restaurant.getEmail().equals(email)){
+        for (Restaurant restaurant : restaurantList) {
+            if (restaurant.getRestautantName().equals(restaurantName)) {
+                if (restaurant.getEmail().equals(email)) {
                     return 2;
-                }
-                else {
+                } else {
                     return 1;
                 }
             }
@@ -80,16 +84,17 @@ public class RestaurantRepositoryImpl {
         return 0;
     }
 
+    @Override
     public boolean isPhoneExist(String phone) {
-        for (Restaurant restaurantOwner : restaurantList){
-            if (restaurantOwner.getPhone().equals(phone)){
+        for (Restaurant restaurantOwner : restaurantList) {
+            if (restaurantOwner.getPhone().equals(phone)) {
                 return true;
             }
         }
         return false;
     }
 
-
+    @Override
     public Map<String, String> getAllAvailableRestaurantList() {
         Map<String, String> restaurantMap = new HashMap<>();
         for (Restaurant restaurant : restaurantList) {
@@ -100,22 +105,23 @@ public class RestaurantRepositoryImpl {
         return restaurantMap;
     }
 
+    @Override
     public String getRestaurantNameById(String restaurantId) {
-        for (Restaurant restaurant : restaurantList){
-            if (String.valueOf(restaurant.getRestaurantsId()).equals(restaurantId)){
+        for (Restaurant restaurant : restaurantList) {
+            if (String.valueOf(restaurant.getRestaurantsId()).equals(restaurantId)) {
                 return restaurant.getRestautantName();
             }
         }
         return null;
     }
 
+    @Override
     public int isValidRestaurantId(String username, String email, String restaurantId) {
-        for (Restaurant restaurant : restaurantList){
-            if (String.valueOf(restaurant.getRestaurantsId()).equals(restaurantId)){
-                if (restaurant.getEmail().equals(email)){
+        for (Restaurant restaurant : restaurantList) {
+            if (String.valueOf(restaurant.getRestaurantsId()).equals(restaurantId)) {
+                if (restaurant.getEmail().equals(email)) {
                     return 2;
-                }
-                else {
+                } else {
                     return 1;
                 }
             }
@@ -123,22 +129,3 @@ public class RestaurantRepositoryImpl {
         return 0;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -53,15 +53,15 @@ public class Restaurant {
         return status;
     }
 
-    public void getStatus(String status) {
-        this.status = status;
-    }
-
     public int getRestaurantsId() {
         return restaurantsId;
     }
 
     public void setRestaurantsId(int restaurantsId) {
         this.restaurantsId = restaurantsId;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

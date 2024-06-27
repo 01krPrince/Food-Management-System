@@ -80,7 +80,7 @@ public class UI {
                 }
 
                 if (choice == 2) {
-                    continue; // go back to the main menu
+                    continue; //  back to the main menu
                 }
 
                 String role;
@@ -250,14 +250,14 @@ public class UI {
                                     } else {
                                         System.out.println("Your registered restaurants name & Id");
                                         for (Map.Entry<String, String> entry : restaurantList.entrySet()) {
-                                            String restaurantName = entry.getKey();
-                                            String restaurantId = entry.getValue();
+                                            String restaurantId = entry.getKey();
+                                            String restaurantName = entry.getValue();
                                             System.out.println("Restaurant name: " + restaurantName + "  Id: " + restaurantId);
                                         }
                                         System.out.println("Enter restaurant Id to check their menu:");
                                         String restaurantId = sc.nextLine();
                                         Map<String, String> restaurantMenu = foodItemController.getRestaurantMenuByRestaurantId(restaurantId);
-                                        if (restaurantMenu.size() == 0) {
+                                        if (restaurantMenu.isEmpty()) {
                                             System.out.println("There is no menu added yet");
                                             System.out.println("1. Add menu");
                                             System.out.println("2. Exit");
@@ -294,10 +294,10 @@ public class UI {
                                         } else {
                                             System.out.println("Menu");
                                             for (Map.Entry<String, String> entry : restaurantMenu.entrySet()) {
-                                                String foodItemName = entry.getKey();
-                                                String itemId = entry.getValue();
-                                                int priceOfItem = foodItemController.getPrice(foodItemName , itemId);
-                                                System.out.println("Item name: " + foodItemName + "  Id: " + itemId + "  price : " + priceOfItem);
+                                                String  foodItemId = entry.getKey();
+                                                String foodItemName = entry.getValue();
+                                                int priceOfItem = foodItemController.getPrice(foodItemName , foodItemId);
+                                                System.out.println("Item name: " + foodItemName + "  Id: " + foodItemId + "  price : " + priceOfItem);
                                             }
                                         }
                                     }
@@ -306,8 +306,8 @@ public class UI {
                                     restaurantList = restaurantController.getRestaurantListOf(email);
                                     System.out.println("Your registered restaurants name & Id");
                                     for (Map.Entry<String, String> entry : restaurantList.entrySet()) {
-                                        String restaurantName = entry.getKey();
-                                        String restaurantId = entry.getValue();
+                                        String restaurantId = entry.getKey();
+                                        String restaurantName = entry.getValue();
                                         System.out.println("Restaurant name: " + restaurantName + "  Id: " + restaurantId);
                                     }
                                     System.out.println("Enter restaurant Id to add item in their menu:");
@@ -340,16 +340,16 @@ public class UI {
 
                                     restaurantListt = restaurantController.getRestaurantListOf(email);
                                     for (Map.Entry<String, String> entry : restaurantListt.entrySet()) {
-                                        String restaurantName = entry.getKey();
-                                        String restauranttId = entry.getValue();
+                                        String restauranttId = entry.getKey();
+                                        String restaurantName = entry.getValue();
                                         System.out.println("Restaurant Id : " + restauranttId + "Restaurant Name : " + restaurantName);
 
                                         restaurantMenu = foodItemController.getRestaurantMenuByRestaurantId(restauranttId);
                                         for (Map.Entry<String , String> entry1 : restaurantMenu.entrySet()){
-                                            String foodItemName = entry1.getKey();
-                                            String itemId = entry1.getValue();
-                                            int priceOfItem = foodItemController.getPrice(foodItemName , itemId);
-                                            System.out.println("Food Id : " + itemId + "  Food Item Name : " + foodItemName + "  price : " + priceOfItem);
+                                            String foodItemId = entry1.getKey();
+                                            String foodItemName = entry1.getValue();
+                                            int priceOfItem = foodItemController.getPrice(foodItemName , foodItemId);
+                                            System.out.println("Food Id : " + foodItemId + "  Food Item Name : " + foodItemName + "  price : " + priceOfItem);
                                         }
                                     }
 
@@ -378,7 +378,7 @@ public class UI {
                                             System.out.println("Choose item id to remove from menu : ");
                                             id2 = sc.nextLine();
                                             for (Map.Entry<String , String> entry1 : restaurantMenu.entrySet()){
-                                                if (entry1.getValue().equals(id2)){
+                                                if (entry1.getKey().equals(id2)){
                                                     found = true;
                                                     break;
                                                 }
@@ -440,17 +440,16 @@ public class UI {
                                     System.out.println();
                                     break;
                                 case 7:
-                                    System.out.println("Are you sure you want to discontinue a restaurant?");
-                                    System.out.println("true or false");
+                                    System.out.println("Are you sure you want to discontinue your restaurant?");
+                                    System.out.println("Enter false to back else true");
                                     if (sc.nextLine().equals("true")) {
                                         System.out.println("Select restaurant to discontinue");
                                         Map<String, String> restaurantList3 = restaurantController.getRestaurantListOf(email);
                                         System.out.println("Your restaurants:");
-                                        int i = 1;
                                         for (Map.Entry<String, String> entry : restaurantList3.entrySet()) {
-                                            restaurantName = entry.getKey();
-                                            System.out.println(i + ". " + restaurantName);
-                                            i++;
+                                            restaurantId = entry.getKey();
+                                            restaurantName = entry.getValue();
+                                            System.out.println("Restaurant id  " + restaurantId + "     Restaurant name  " + restaurantName);
                                         }
                                         System.out.print("Enter the number of the restaurant: ");
                                         while (true) {
@@ -476,15 +475,15 @@ public class UI {
                                 case 8:
                                     break ownerMenu;
 
-                                case 9 :  //  Checking Order Request   &    Updating Order Status
+                                case 9: // Checking Order Request & Updating Order Status
                                     List<String> checkingOrderRequest;
                                     Map<String, String> restaurantList3 = restaurantController.getRestaurantListOf(email);
                                     for (Map.Entry<String, String> entry : restaurantList3.entrySet()) {
-                                        restaurantId = entry.getValue();
+                                        restaurantId = entry.getKey();
                                         checkingOrderRequest = orderController.checkingOrderRequest(restaurantId);
-                                        for (String orderId : checkingOrderRequest){
-                                            if (orderController.deliverOrder(orderId)){
-                                                System.out.print("Order id "+orderId + " is IN_PROGRESS   ------>>>>>>  COMPLETED");
+                                        for (String orderId : checkingOrderRequest) {
+                                            if (orderController.deliverOrder(orderId)) {
+                                                System.out.println("Order id " + orderId + " is IN_PROGRESS   ------>>>>>>  COMPLETED");
                                             }
                                             System.out.println();
                                         }
@@ -492,9 +491,14 @@ public class UI {
                                     break;
                                 default:
                                     System.out.println("Invalid option. Please select a valid option.");
+                                    break;
                             }
                         }
                     }
+
+
+
+
 
 
 
@@ -550,12 +554,12 @@ public class UI {
                             switch (choice) {
                                 case 1:  //  Place an order
                                     Map<String, String> restaurantList = restaurantController.getAllAvailableRestaurantList();
-                                    if (restaurantList.size() == 0){
+                                    if (restaurantList.isEmpty()){
                                         System.out.println("Now, There is no restaurant available");
                                     }
                                     else {
-                                        String ifAdddressAdded = userController.getAddress(username,email);
-                                        if (ifAdddressAdded == null){
+                                        String ifAddressAdded = userController.getAddress(username,email);
+                                        if (ifAddressAdded == null){
                                             System.out.print("Enter your Address : ");
                                             String address = sc.nextLine();
                                             System.out.print("Enter phone number : ");
@@ -569,10 +573,10 @@ public class UI {
                                             System.out.println("Restaurant Id : " +  restaurantId + "    Restaurant name : " + restaurantName);
                                             Map<String , String> menuOfRestaurant = foodItemController.getRestaurantMenuByRestaurantId(restaurantId);
                                             for (Map.Entry<String , String> entry1 : menuOfRestaurant.entrySet()) {
-                                                String foodId = entry1.getValue();
-                                                String foodItemName = entry1.getKey();
-                                                int priceOfItem = foodItemController.getPrice(foodItemName , foodId);
-                                                System.out.println("Item id : " + foodId  +"   Item name : "  +  foodItemName  + "   Item price : " + priceOfItem);
+                                                String foodItemName = entry1.getValue();
+                                                String  foodItemId = entry1.getKey();
+                                                int priceOfItem = foodItemController.getPrice(foodItemName , foodItemId);
+                                                System.out.println("Item id : " + foodItemId  +"   Item name : "  +  foodItemName  + "   Item price : " + priceOfItem);
                                             }
                                         }
                                         System.out.print("Enter restaurant id : ");
@@ -601,8 +605,8 @@ public class UI {
                                     } else {
                                         System.out.println("History :-");
                                         for (Map.Entry<String, String> entity : orderHistory.entrySet()) {
-                                            String orderId = entity.getValue();
-                                            String orderItemName = entity.getKey();
+                                            String orderItemName = entity.getValue();
+                                            String orderId = entity.getKey();
                                             String foodId = orderController.getFoodIdBy(orderId);
                                             int priceOfItem = foodItemController.getPrice(orderItemName, foodId);
                                             System.out.println("Order Id : " + orderId + "   Order Item : " + orderItemName + "   Price : " + priceOfItem);
@@ -626,14 +630,13 @@ public class UI {
                                     else {
                                         System.out.println("Order status :-");
                                         for (Map.Entry<String,String> entity : orderHistory.entrySet()){
-                                            String orderId = entity.getValue();
-                                            String orderItemName = entity.getKey();
+                                            String orderItemName = entity.getValue();
+                                            String orderId = entity.getKey();
                                             String foodId = orderController.getFoodIdBy(orderId);
-                                            int priceOfItem = foodItemController.getPrice(orderItemName , foodId);
-                                            System.out.print("Order Id : " +  orderId + "   Order Item name : " +  orderItemName + "   Price : " + priceOfItem + "    " );
-                                            List<String> orderHistoryDetailsList = orderController.orderHistoryDetails(orderItemName , orderId);
-                                            System.out.print("Order status : " + orderHistoryDetailsList.get(1));
-                                            System.out.println();
+                                            int priceOfItem = foodItemController.getPrice(orderId, foodId);
+                                            System.out.print("Order Id : " +  orderId + "   Order Item name : " + orderId + "   Price : " + priceOfItem + "    " );
+                                            List<String> orderHistoryDetailsList = orderController.orderHistoryDetails(orderId, orderId);
+                                            System.out.println("Order status : " + orderHistoryDetailsList.get(1));
                                         }
                                     }
                                     break;
@@ -644,6 +647,37 @@ public class UI {
                                     System.out.println("Exiting application...");
                                     return;
                                 case 6:  // Cancel order
+                                    System.out.println("1. cancel order");
+                                    System.out.println("2. Back");
+                                    while (true){
+                                        try {
+                                            choice = sc.nextInt();
+                                            if (choice == 1  ||  choice == 2){
+                                                break;
+                                            }
+                                        }
+                                        catch (Exception e){
+                                            System.out.print("Enter a valid choice :");
+                                        }
+                                    }
+                                    if (choice == 1){
+                                        System.out.println("Enter order id to cancel : ");
+                                        Map<String , String> pendingOrderList = orderController.getPendingOrderList();
+                                        if (pendingOrderList.isEmpty()){
+                                            System.out.println("You do not have any PENDING order");
+                                        }
+                                        else {
+                                            for (Map.Entry<String,String> entry : pendingOrderList.entrySet()){
+                                                String orderItemName = entry.getValue();
+                                                String orderId = entry.getKey();
+                                                System.out.println("Order Id : " +  orderId + "   Order Item name : " +  orderItemName + "   Price : " + orderItemName + "    " );
+                                            }
+                                        }
+                                    }
+                                    if (choice == 2){
+                                        break;
+                                    }
+
                                     break;
                                 default:
                                     System.out.println("Invalid option. Please select a valid option.");

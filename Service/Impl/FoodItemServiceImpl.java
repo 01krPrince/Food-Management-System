@@ -1,19 +1,16 @@
-package Service;
+package Service.Impl;
 
 
-import Repositories.FoodItemRepositoryImpl;
+import Repositories.Impl.FoodItemRepositoryImpl;
+import Service.FoodItemService;
 
 import java.util.Map;
 
-public class FoodItemServiceImpl {
+public class FoodItemServiceImpl implements FoodItemService {
     FoodItemRepositoryImpl foodItemRepositoryImpl = new FoodItemRepositoryImpl();
 
     public void addItem(String item,String restaurantName, String restaurantId , int price) {
         foodItemRepositoryImpl.addItem( item,restaurantName,  restaurantId , price);
-    }
-
-    public Map<String , String> getRestaurantMenuOf(String restaurantName) {
-        return foodItemRepositoryImpl.getRestaurantMenuOf(restaurantName);
     }
 
     public void removeItem(String restaurantId, String foodItemId) {

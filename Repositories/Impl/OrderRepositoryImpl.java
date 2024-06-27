@@ -1,5 +1,6 @@
-package Repositories;
+package Repositories.Impl;
 
+import Repositories.OrderRepository;
 import model.Order;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OrderRepositoryImpl {
+public class OrderRepositoryImpl implements OrderRepository {
 
     private static final List<Order> orderList = new ArrayList<>();
     static int orderID = 199;
@@ -23,7 +24,7 @@ public class OrderRepositoryImpl {
         Map<String , String > orderHistory = new HashMap<>();
         for (Order order : orderList){
             if (order.getUsername().equals(username)  &&  order.getEmail().equals(email)){
-                orderHistory.put(order.getItemName() , String.valueOf(order.getOrderID()));
+                orderHistory.put(String.valueOf(order.getOrderID()) , order.getItemName());
             }
         }
         return orderHistory;
@@ -76,5 +77,15 @@ public class OrderRepositoryImpl {
             }
         }
         return null;
+    }
+
+    public Map<String, String> getPendingOrderList() {
+        Map<String,String> pendingOrderList = new HashMap<>();
+        for (Order order : orderList){
+            if (order.getOrderStatus().equals("PENDING")){
+                pendingOrderList.put(order.getItemID() , order.getItemName());
+            }
+        }
+        return pendingOrderList;
     }
 }

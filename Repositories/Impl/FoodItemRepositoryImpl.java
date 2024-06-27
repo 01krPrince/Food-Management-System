@@ -1,5 +1,6 @@
-package Repositories;
+package Repositories.Impl;
 
+import Repositories.FoodItemRepository;
 import model.FoodItem;
 
 import java.util.ArrayList;
@@ -7,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FoodItemRepositoryImpl {
+public class FoodItemRepositoryImpl implements FoodItemRepository {
     List<FoodItem> foodItemsList = new ArrayList<>();
     static int foodItemId = 1;
 
@@ -15,16 +16,6 @@ public class FoodItemRepositoryImpl {
         foodItemId = foodItemsList.size() + 1;
         FoodItem foodItem = new FoodItem(foodItemName, foodItemId, restaurantName, restaurantId, price);
         foodItemsList.add(foodItem);
-    }
-
-    public Map<String, String> getRestaurantMenuOf(String restaurantName) {
-        Map<String, String> menuOf = new HashMap<>();
-        for (FoodItem item : foodItemsList) {
-            if (item.getRestaurantname().equals(restaurantName)  &&  item.getStatus().equals("available")){
-                menuOf.put(item.getfoodItemName(), String.valueOf(item.getFoodItemsId()));
-            }
-        }
-        return menuOf;
     }
 
     public void removeItem(String restaurantId, String foodItemId) {
@@ -42,7 +33,7 @@ public class FoodItemRepositoryImpl {
         for (FoodItem foodItem : foodItemsList) {
             if (foodItem.getStatus() != null && foodItem.getRestaurantId() != null &&
                     foodItem.getStatus().equals("available") && foodItem.getRestaurantId().equals(restaurantId)) {
-                menuOf.put(foodItem.getfoodItemName(), String.valueOf(foodItem.getFoodItemsId()));
+                menuOf.put(String.valueOf(foodItem.getFoodItemsId()) , foodItem.getfoodItemName());
             }
         }
         return menuOf;

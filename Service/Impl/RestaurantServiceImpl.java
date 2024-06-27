@@ -1,25 +1,17 @@
-package Service;
+package Service.Impl;
 
 
-import Repositories.RestaurantRepositoryImpl;
+import Repositories.Impl.RestaurantRepositoryImpl;
+import Service.RestaurantService;
 
-import java.util.List;
 import java.util.Map;
 
-public class RestaurantServiceImpl {
+public class RestaurantServiceImpl implements RestaurantService {
     RestaurantRepositoryImpl restaurantRepositoryImpl = new RestaurantRepositoryImpl();
 
 
     public int registerRestaurant(String email, String restaurantName, String location , String phone) {
         return restaurantRepositoryImpl.registerRestaurant(email , restaurantName , location , phone);
-    }
-
-    public List getRestaurantNameList(String email, String password) {
-        return restaurantRepositoryImpl.getRestaurantNameList(email , password);
-    }
-
-    public String getrestaurantNameByEamil(String email) {
-        return restaurantRepositoryImpl.getRestaurantNameByEamil(email);
     }
 
     public Map<String, String> getRestaurantListOf(String email) {
@@ -34,7 +26,7 @@ public class RestaurantServiceImpl {
         return restaurantRepositoryImpl.isRestaurantExist(restaurantName , email);
     }
 
-    public boolean isphoneExist(String phone) {
+    public boolean isPhoneExist(String phone) {
         return restaurantRepositoryImpl.isPhoneExist(phone);
     }
 

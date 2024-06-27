@@ -1,11 +1,12 @@
-package Service;
+package Service.Impl;
 
-import Repositories.OrderRepositoryImpl;
+import Repositories.Impl.OrderRepositoryImpl;
+import Service.OrderService;
 
 import java.util.List;
 import java.util.Map;
 
-public class OrderServiceImpl {
+public class OrderServiceImpl implements OrderService {
     OrderRepositoryImpl orderRepositoryImpl = new OrderRepositoryImpl();
 
     public void placeOrder(String restaurantId, String restaurantName , String foodItemId,String foodtemName ,String username , String email , int price) {
@@ -34,5 +35,9 @@ public class OrderServiceImpl {
 
     public String getFoodIdBy(String orderId) {
         return orderRepositoryImpl.getFoodIdBy(orderId);
+    }
+
+    public Map<String, String> getPendingOrderList() {
+        return orderRepositoryImpl.getPendingOrderList();
     }
 }

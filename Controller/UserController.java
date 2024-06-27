@@ -1,6 +1,6 @@
 package Controller;
 
-import Service.UserServiceImpl;
+import Service.Impl.UserServiceImpl;
 
 public class UserController {
     UserServiceImpl userServiceImpl = new UserServiceImpl();
@@ -22,7 +22,7 @@ public class UserController {
     }
 
     public void saveAddressandPhoneOfCustomer(String username, String email, String phoneNo , String address) {
-        userServiceImpl.saveAddressandPhoneOfCustomer(username , email , phoneNo , address);
+        userServiceImpl.saveAddressAndPhoneOfCustomer(username , email , phoneNo , address);
     }
 
     public String getAddress(String username, String email) {
