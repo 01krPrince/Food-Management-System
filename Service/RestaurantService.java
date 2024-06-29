@@ -8,7 +8,7 @@ public interface RestaurantService {
 
     Map<String, String> getRestaurantListOf(String email);
 
-    String discontinue(int restaurantChoice);
+    String discontinue(String restaurantChoice);
 
     int isRestaurantExist(String restaurantName, String email);
 

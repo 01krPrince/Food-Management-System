@@ -18,7 +18,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurantRepositoryImpl.getRestaurantListOf(email);
     }
 
-    public String discontinue(int restaurantChoice) {
+    public String discontinue(String  restaurantChoice) {
         return restaurantRepositoryImpl.discontinueRestaurant(restaurantChoice);
     }
 
@@ -40,5 +40,17 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     public int isValidRestaurantId(String username, String email, String restaurantId) {
         return restaurantRepositoryImpl.isValidRestaurantId(username , email , restaurantId);
+    }
+
+    public void updateRestaurantName(String id1, String email , String newRestaurantName) {
+        restaurantRepositoryImpl.updateRestaurantName(id1 , email ,newRestaurantName);
+    }
+
+    public void updateRestaurantAddress(String id1, String email, String newRestaurantAddress) {
+        restaurantRepositoryImpl.updateRestaurantAddress(id1 , email , newRestaurantAddress);
+    }
+
+    public void updateRestaurantPhone(String id1, String email, String newRestaurantPhone) {
+        restaurantRepositoryImpl.updateRestaurantPhone(id1 , email , newRestaurantPhone);
     }
 }

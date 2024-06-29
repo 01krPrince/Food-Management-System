@@ -40,4 +40,12 @@ public class OrderServiceImpl implements OrderService {
     public Map<String, String> getPendingOrderList() {
         return orderRepositoryImpl.getPendingOrderList();
     }
+
+    public void cancelOrder(String orderIdToCancel) {
+        orderRepositoryImpl.cancelOrder(orderIdToCancel);
+    }
+
+    public String getFoodItemName(String foodId, String orderId) {
+        return orderRepositoryImpl.getFoodItemName(foodId , orderId);
+    }
 }

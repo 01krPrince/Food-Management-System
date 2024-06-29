@@ -83,9 +83,32 @@ public class OrderRepositoryImpl implements OrderRepository {
         Map<String,String> pendingOrderList = new HashMap<>();
         for (Order order : orderList){
             if (order.getOrderStatus().equals("PENDING")){
-                pendingOrderList.put(order.getItemID() , order.getItemName());
+                pendingOrderList.put(String.valueOf(order.getOrderID()) , order.getItemID());
             }
         }
         return pendingOrderList;
+    }
+
+    public void cancelOrder(String orderIdToCancel) {
+        boolean orderFound = false;
+        for (Order order : orderList){
+            if (String.valueOf(order.getOrderID()).equals(orderIdToCancel)){
+                order.setOrderStatus("cancelled");
+                orderFound = true;
+            }
+        }
+        if (!orderFound) {
+            System.out.println("Order ID " + orderIdToCancel + " not found.");
+        }
+    }
+
+
+    public String getFoodItemName(String foodId, String orderId) {
+        for (Order order : orderList){
+            if (String.valueOf(order.getFoodID()).equals(foodId)  &&  String.valueOf(order.getOrderID()).equals(orderId)){
+                return order.getItemName();
+            }
+        }
+        return null;
     }
 }

@@ -71,4 +71,15 @@ public class UserRepositoryImpl implements UserRepository {
         }
         return null;
     }
+
+    public List<String> getProfile(String username, String password, String email) {
+        List<String> userProfile = new ArrayList<>();
+        for (User user : userList){
+            if (user.getUsername().equals(username)  &&  user.getPassword().equals(password)  &&  user.getEmail().equals(email)){
+                userProfile.add("Phone number :     "+user.getPhone());
+                userProfile.add("Address :     "+user.getAddress());
+            }
+        }
+        return userProfile;
+    }
 }

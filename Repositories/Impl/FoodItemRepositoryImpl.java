@@ -60,4 +60,11 @@ public class FoodItemRepositoryImpl implements FoodItemRepository {
         return 0;
     }
 
+    public void updateItemPrice(String id1, String id2 , String newPrice) {
+        for (FoodItem foodItem : foodItemsList){
+            if (foodItem.getRestaurantId().equals(id1)  &&  String.valueOf(foodItem.getFoodItemsId()).equals(id2)){
+                foodItem.setPrice(Integer.valueOf(newPrice));
+            }
+        }
+    }
 }

@@ -28,4 +28,8 @@ public class FoodItemController {
     public int getPrice(String foodItemName, String  foodId) {
         return foodItemServiceImpl.getPrice(foodItemName , foodId);
     }
+
+    public void updateItemPrice(String id1, String id2 , String newPrice) {
+        foodItemServiceImpl.updateItemPrice(id1 , id2 , newPrice);
+    }
 }

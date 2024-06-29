@@ -1,8 +1,10 @@
 public class HelperClass {
 
-    public static boolean validateName(String username) {
-        return username.matches("[a-zA-Z]+(\\s[a-zA-Z]+)?");
+    public static boolean validateNameWithoutSpecialCharacters(String username) {
+        return username.matches("[a-zA-Z]+( [a-zA-Z]+)*"); // Allows alphabetic characters and spaces but not only spaces
     }
+
+
 
     public static boolean validateEmail(String email) {
         // Regular expression for validating an email address

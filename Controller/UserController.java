@@ -2,6 +2,8 @@ package Controller;
 
 import Service.Impl.UserServiceImpl;
 
+import java.util.List;
+
 public class UserController {
     UserServiceImpl userServiceImpl = new UserServiceImpl();
 
@@ -27,5 +29,9 @@ public class UserController {
 
     public String getAddress(String username, String email) {
         return userServiceImpl.getAddress(username , email);
+    }
+
+    public List<String> getProfile(String username, String password, String email) {
+        return userServiceImpl.getProfile(username,password,email);
     }
 }

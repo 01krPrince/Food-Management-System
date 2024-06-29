@@ -9,7 +9,7 @@ public interface RestaurantRepository {
     List<String> getRestaurantNameList(String email, String password);
 //    String getRestaurantNameByEmail(String email);
     Map<String, String> getRestaurantListOf(String email);
-    String discontinueRestaurant(int restaurantChoice);
+    String discontinueRestaurant(String restaurantChoice);
     int isRestaurantExist(String restaurantName, String email);
     boolean isPhoneExist(String phone);
     Map<String, String> getAllAvailableRestaurantList();

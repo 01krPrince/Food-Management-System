@@ -37,4 +37,12 @@ public class OrderController {
     public Map<String, String> getPendingOrderList() {
         return orderServiceImpl.getPendingOrderList();
     }
+
+    public void cancelOrder(String orderIdToCancel) {
+        orderServiceImpl.cancelOrder(orderIdToCancel);
+    }
+
+    public String getFoodItemName(String foodId, String orderId) {
+        return orderServiceImpl.getFoodItemName(foodId , orderId);
+    }
 }

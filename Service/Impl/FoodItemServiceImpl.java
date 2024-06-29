@@ -28,4 +28,8 @@ public class FoodItemServiceImpl implements FoodItemService {
     public int getPrice(String foodItemName, String foodId) {
         return foodItemRepositoryImpl.getPrice(foodItemName , foodId);
     }
+
+    public void updateItemPrice(String id1, String id2 , String newPrice) {
+        foodItemRepositoryImpl.updateItemPrice(id1 , id2 , newPrice);
+    }
 }

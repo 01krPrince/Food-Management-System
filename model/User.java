@@ -7,7 +7,7 @@ public class User {
     private String email;
     private String role;
     private String phone;
-    private String address = null;
+    private String address;
 
     public User(String username , String email , String role , String password){
         this.username = username;

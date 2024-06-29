@@ -6,23 +6,23 @@ public class Restaurant {
     private String phone;
     private String email;
     private String status;
-    private int restaurantsId;
+    private int restaurantId;
 
-    public Restaurant(String restautantName, String location, String phone, String email , int restaurantsId) {
-        this.restaurantName = restautantName;
+    public Restaurant(String restaurantName, String location, String phone, String email , int restaurantsId) {
+        this.restaurantName = restaurantName;
         this.location = location;
         this.phone = phone;
         this.email = email;
         this.status = "open";
-        this.restaurantsId = restaurantsId;
+        this.restaurantId = restaurantsId;
     }
 
-    public String getRestautantName() {
+    public String getRestaurantName() {
         return restaurantName;
     }
 
-    public void setRestautantName(String restautantName) {
-        this.restaurantName = restautantName;
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 
     public String getEmail() {
@@ -54,11 +54,7 @@ public class Restaurant {
     }
 
     public int getRestaurantsId() {
-        return restaurantsId;
-    }
-
-    public void setRestaurantsId(int restaurantsId) {
-        this.restaurantsId = restaurantsId;
+        return restaurantId;
     }
 
     public void setStatus(String status) {

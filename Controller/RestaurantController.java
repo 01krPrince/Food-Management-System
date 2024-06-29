@@ -15,7 +15,7 @@ public class RestaurantController {
         return restaurantServiceImpl.getRestaurantListOf(email);
     }
 
-    public String discontinue(int restaurantChoice) {
+    public String discontinue(String restaurantChoice) {
         return restaurantServiceImpl.discontinue(restaurantChoice);
     }
 
@@ -37,5 +37,17 @@ public class RestaurantController {
 
     public int isValidRestaurantId(String username, String email, String restaurantId) {
         return restaurantServiceImpl.isValidRestaurantId(username , email , restaurantId);
+    }
+
+    public void updateRestaurantName(String id1, String email , String newRestaurantName) {
+        restaurantServiceImpl.updateRestaurantName(id1 , email , newRestaurantName);
+    }
+
+    public void updateRestaurantAddress(String id1, String email, String newRestaurantAddress) {
+        restaurantServiceImpl.updateRestaurantAddress(id1 , email , newRestaurantAddress);
+    }
+
+    public void updateRestaurantPhone(String id1, String email, String newRestaurantPhone) {
+        restaurantServiceImpl.updateRestaurantPhone(id1 , email , newRestaurantPhone);
     }
 }

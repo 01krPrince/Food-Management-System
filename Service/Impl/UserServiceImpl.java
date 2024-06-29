@@ -3,6 +3,8 @@ package Service.Impl;
 import Repositories.Impl.UserRepositoryImpl;
 import Service.UserService;
 
+import java.util.List;
+
 public class UserServiceImpl implements UserService {
 
     UserRepositoryImpl userRepositoryImpl = new UserRepositoryImpl();
@@ -37,5 +39,9 @@ public class UserServiceImpl implements UserService {
 
     public String getAddress(String username, String email) {
         return userRepositoryImpl.getAddress(username , email);
+    }
+
+    public List<String> getProfile(String username, String password, String email) {
+        return userRepositoryImpl.getProfile(username,password,email);
     }
 }
